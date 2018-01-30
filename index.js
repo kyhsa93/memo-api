@@ -12,7 +12,6 @@ var header = require('./src/middleware/header');
 var create = require('./src/routes/create');
 
 app.use(header());
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
