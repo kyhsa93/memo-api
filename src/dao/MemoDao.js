@@ -6,12 +6,23 @@ INTO
     memo.memo
 SET
     title = ?,
-    text = ?,
+    memo = ?,
     signUpNumber = ?,
     categoryNumber = ?`;
 
+var LIST_SQL = `SELECT
+    *
+FROM
+    memo.memo`;
+
 module.exports = class MemoDao {
     constructor(){};
+
+    list(callBack) {
+        pool.query(LIST_SQL, (error, result) => {
+            callBack(result);
+        })
+    }
 
     /**
      * @type {function}

@@ -2,15 +2,19 @@ var co = require('co');
 var MemoDao = require('../dao/MemoDao');
 
 module.exports = (request, response) => {
+    if (request.user.idCode == 'unknown') {
+        sendResponse(false);
+        return;
+    }
     var memoDao = new MemoDao();
-
+    
     var data = [
         request.body.title,
-        request.body.text,
+        request.body.memo,
         request.user.idCode,
         request.body.categoryNumber
     ];
-
+    
     function sendResponse(result) {
         if (result) {
             response.status(201).json({
